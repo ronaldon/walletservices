@@ -151,7 +151,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.recargapay.walletservices.WalletServicesApplication</mainClass>
+					<mainClass>com.walletservices.WalletServicesApplication</mainClass>
 					<layout>JAR</layout>
 					<excludes>
 						<exclude>
