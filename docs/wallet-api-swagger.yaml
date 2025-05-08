@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Wallet Services API
+  description: API for managing digital wallets
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/wallet-services/api/v1
+paths:
+  /wallets:
+    post:
+      summary: Create a new wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Wallet created
+  /wallets/{walletId}/balance:
+    get:
+      summary: Get current balance
+      parameters:
+        - name: walletId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: timestamp
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Current balance retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: number
+                    format: double
+  /transactions/deposit:
+    post:
+      summary: Deposit funds into a wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                walletId:
+                  type: integer
+                amount:
+                  type: number
+                  format: double
+      responses:
+        '201':
+          description: Funds deposited
+  /transactions/withdraw:
+    post:
+      summary: Withdraw funds from a wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                walletId:
+                  type: integer
+                amount:
+                  type: number
+                  format: double
+      responses:
+        '201':
+          description: Funds withdrawn
+  /transactions/transfer:
+    post:
+      summary: Transfer funds between wallets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fromWalletId:
+                  type: integer
+                toWalletId:
+                  type: integer
+                amount:
+                  type: number
+                  format: double
+      responses:
+        '201':
+          description: Funds transferred
